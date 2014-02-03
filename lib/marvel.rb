@@ -29,14 +29,13 @@ DEFAULT_PARAMS     = "apikey=#{MARVEL_PUBLIC_KEY}&ts=#{MARVEL_TIMESTAMP}&hash=#{
 
 class SetAuthParams < Faraday::Middleware
   def call(env)
-    env[:url].query = DEFAULT_PARAMS
+    env[:url].query = "#{DEFAULT_PARAMS}&#{env[:url].query}"
     @app.call(env)
   end
 end
 
 class MarvelParser < Faraday::Response::Middleware
   def on_complete(env)
-    puts env
     json = JSON.parse(env[:body], :symbolize_names => true)
     if json[:code] == 200
       json = json[:data][:results] || json[:data][:result]
@@ -48,6 +47,7 @@ class MarvelParser < Faraday::Response::Middleware
         j[:series]     = j[:series][:items]     if j[:series].present?
         j[:stories]    = j[:stories][:items]    if j[:stories].present?
       end
+      # TODO: We don't *alwyas* want to do this
       json = json.first if json.length == 1
       errors = json.delete(:errors) || {}
       metadata = json.delete(:metadata) || []
@@ -59,7 +59,7 @@ class MarvelParser < Faraday::Response::Middleware
   end
 end
 
-Her::API.setup url: "https://gateway.marvel.com/v1/public" do |c|
+Her::API.setup url: "http://gateway.marvel.com/v1/public" do |c|
   # Authentication
   c.use SetAuthParams
   # Request
