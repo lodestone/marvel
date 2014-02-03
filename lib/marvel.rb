@@ -6,6 +6,7 @@ module Her
   module Model
     module Introspection
       extend ActiveSupport::Concern
+      # Monkey patch this method to use attributes[k] instead of send
       def inspect
         resource_path = begin
           request_path
@@ -41,11 +42,11 @@ class MarvelParser < Faraday::Response::Middleware
       json = json[:data][:results] || json[:data][:result]
       json.each do |j|
         j[:characters] = j[:characters][:items] if j[:characters].present?
-        j[:comics]  = j[:comics][:items] if j[:comics].present?
-        j[:creators] = j[:creators][:items] if j[:creators].present?
-        j[:events]  = j[:events][:items] if j[:events].present?
-        j[:series] = j[:series][:items] if j[:series].present?
-        j[:stories] = j[:stories][:items] if j[:stories].present?
+        j[:comics]     = j[:comics][:items]     if j[:comics].present?
+        j[:creators]   = j[:creators][:items]   if j[:creators].present?
+        j[:events]     = j[:events][:items]     if j[:events].present?
+        j[:series]     = j[:series][:items]     if j[:series].present?
+        j[:stories]    = j[:stories][:items]    if j[:stories].present?
       end
       json = json.first if json.length == 1
       errors = json.delete(:errors) || {}
@@ -74,6 +75,7 @@ module Marvel;end
 
 # TODO: Watch these and see if they make sense breaking out into separate files
 class Marvel::Base
+
   include Her::Model
 
   def id
