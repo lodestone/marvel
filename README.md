@@ -1,15 +1,16 @@
 # Marvel 
 
-*Ruby wrapper for [Marvel Comics API](http://developer.marvel.com)*
+*Ruby [Marvel Comics API](http://developer.marvel.com) library*
 
 > *Excelsior!*
 
 ## About
  
+This is a ruby wrapper for the Marvel Comics API.
+
 On January 31, 2014 Marvel Comics announced a beta API connecting to Marvel's database of comics, characters, and creators. 
 (Press release: *[Marvel Announces the Release of the API Program](http://nx.is/pbP7)*)
 
-This is a ruby wrapper for that API. 
 
 ## Install
 

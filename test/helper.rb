@@ -23,12 +23,12 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'test/unit'
-require 'shoulda'
+require "minitest/autorun"
+require "minitest/spec"
+require "minitest/pride"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'marvel'
 
-class Test::Unit::TestCase
-end
+SPIDER_MAN_ID = 1009610

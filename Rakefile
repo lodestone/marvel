@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/lodestone/marvel"
   gem.license = "MIT"
   gem.summary = %Q{Marvel Comics API in ruby}
-  gem.description = %Q{Ruby wrapper for Marvel Comics developer API}
+  gem.description = %Q{Ruby Marvel Comics API library}
   gem.email = "matt@kizmeta.com"
   gem.authors = ["Matt Petty"]
   # dependencies defined in Gemfile
