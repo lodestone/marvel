@@ -9,4 +9,10 @@ group :development do
   gem "jeweler", "~> 2.0.1"
   gem "simplecov", ">= 0"
   gem "fakeweb"
+  gem 'pry'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
 end
