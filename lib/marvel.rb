@@ -9,7 +9,7 @@ module Marvel
   # TODO: Let these variables come from a config file or pass them in
   PUBLIC_KEY         = ENV["MARVEL_PUBLIC_KEY"]
   PRIVATE_KEY        = ENV["MARVEL_PRIVATE_KEY"]
-  TIMESTAMP          = DateTime.now.to_s
+  TIMESTAMP          = Time.now.to_i.to_s
   URL_HASH           = Digest::MD5.hexdigest("#{TIMESTAMP}#{PRIVATE_KEY}#{PUBLIC_KEY}")
   DEFAULT_PARAMS     = "apikey=#{PUBLIC_KEY}&ts=#{TIMESTAMP}&hash=#{URL_HASH}"
   BASE_URL           = "http://gateway.marvel.com/v1/public"

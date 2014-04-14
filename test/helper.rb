@@ -32,3 +32,10 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'marvel'
 
 SPIDER_MAN_ID = 1009610
+
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'test/vcr_cassets'
+  c.hook_into :webmock
+end
